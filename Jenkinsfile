@@ -1,21 +1,13 @@
 pipeline{
     agent any
-
-    tools {
-         maven 'maven'
-         jdk 'java'
-    }
-
-    stages{
-        stage('checkout'){
-            steps{
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'github access', url: 'https://github.com/sreenivas449/java-hello-world-with-maven.git']]])
-            }
-        }
-        stage('build'){
-            steps{
-               bat 'mvn package'
-            }
-        }
-    }
+stage('source code'){
+//get the code 
+git branch: 'sprint1_develop', url: 'https://github.com/rupeshkumaris/java-hello-world-with-maven.git'
+}
+stage('Build the Code')  
+{
+sh 'mvn package'
+}  
+stage ('Archiving the package')
+archiveArtifacts artifacts: '**/*.war', followSymlinks: false
 }
