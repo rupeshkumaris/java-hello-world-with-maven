@@ -1,19 +1,23 @@
-pipeline{
+pipeline {
     agent any
-stage("source code") {
+stages {
+    stage("source code") {
 //get the code 
-steps{
+        steps {
     git branch: 'sprint1_develop', url: 'https://github.com/rupeshkumaris/java-hello-world-with-maven.git'
+    }
 }
-}
-stage("Build the Code") {
-    steps{
+    stage("Build the Code") {
+        steps {
     sh 'mvn package'
     }
 }  
 stage ("Archiving the package") {
-    steps{
+    steps {
 archiveArtifacts artifacts: '**/*.war', followSymlinks: false
     }
+ }
 }
 }
+
+
