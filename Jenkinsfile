@@ -14,7 +14,7 @@ stages {
 }  
 stage ("Archiving the package") {
     steps {
-archiveArtifacts artifacts: '**/*.war', followSymlinks: false
+archiveArtifacts artifacts: '**/*.jar', followSymlinks: false
     }
  }
 }
